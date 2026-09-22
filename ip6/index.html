@@ -1,1 +1,707 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Movie Ticket Booking</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            padding-bottom: 30px;
+        }
+
+        /* Header */
+        header {
+            background-color: #1e3a5f;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        header h1 {
+            font-size: 30px;
+        }
+
+        /* Main Container */
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 35px auto;
+            background-color: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .intro p {
+            color: #666;
+            font-size: 17px;
+            margin-top: 10px;
+        }
+
+        /* Movies */
+        .movies {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 35px;
+        }
+
+        .movie-card {
+            width: 220px;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .movie-card img {
+            width: 150px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .movie-card h3 {
+            color: #1e3a5f;
+            margin-bottom: 8px;
+        }
+
+        .movie-card p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Table */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 35px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #1e3a5f;
+            color: white;
+            padding: 13px;
+        }
+
+        td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        /* Form */
+        .booking-form {
+            background-color: #f8fafc;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .booking-form h2 {
+            text-align: center;
+            color: #1e3a5f;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #444;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 4px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Radio Buttons */
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .radio-option {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 12px 18px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .radio-option:hover {
+            border-color: #2563eb;
+        }
+
+        /* Amount */
+        .amount-box {
+            background-color: #eaf2ff;
+            padding: 18px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .amount-box h3 {
+            color: #1d4ed8;
+        }
+
+        #totalAmount {
+            font-size: 28px;
+            font-weight: bold;
+            color: #15803d;
+            margin-top: 8px;
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .pay-btn {
+            background-color: #2563eb;
+            color: white;
+        }
+
+        .pay-btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        .submit-btn {
+            background-color: #16a34a;
+            color: white;
+        }
+
+        .submit-btn:hover {
+            background-color: #15803d;
+        }
+
+        /* Result */
+        #result {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #dcfce7;
+            border: 1px solid #86efac;
+            border-radius: 10px;
+            text-align: center;
+            color: #166534;
+        }
+
+        #result h2 {
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            header h1 {
+                font-size: 22px;
+            }
+
+            .container {
+                width: 95%;
+                padding: 20px;
+            }
+
+            .movies {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- Header -->
+
+    <header>
+        <h1>🎬 MOVIE TICKET BOOKING</h1>
+    </header>
+
+
+    <div class="container">
+
+        <!-- Introduction -->
+
+        <div class="intro">
+
+            <h2>Book Your Movie Ticket</h2>
+
+            <p>
+                Select your favourite movie, choose the number of seats
+                and book your tickets easily.
+            </p>
+
+        </div>
+
+
+        <!-- Movie Posters -->
+
+        <div class="movies">
+
+            <div class="movie-card">
+
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1BHYQPKYUyrPG9ifYC1aSrL8W0zh35EO8HsYQy4RuXg&s=10"
+                     alt="Ghost House">
+
+                <h3>Ghost House</h3>
+
+                <p>Show Time: 10:30 AM</p>
+
+                <p>Ticket: ₹150</p>
+
+            </div>
+
+
+            <div class="movie-card">
+
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPbFPUNVFJOGKvqEOsQCJLT60mjrcQ0x_4V2HSo5HAXQ&s=10"
+                     alt="Theri">
+
+                <h3>Thalapathy Theri</h3>
+
+                <p>Show Time: 10:30 PM</p>
+
+                <p>Ticket: ₹230</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Movie Details -->
+
+        <div class="table-container">
+
+            <table>
+
+                <tr>
+                    <th>Movie Name</th>
+                    <th>Time</th>
+                    <th>Available Seats</th>
+                    <th>Amount</th>
+                </tr>
+
+                <tr>
+                    <td>Ghost House</td>
+                    <td>10:30 AM</td>
+                    <td>3</td>
+                    <td>₹150</td>
+                </tr>
+
+                <tr>
+                    <td>Thalapathy Theri</td>
+                    <td>10:30 PM</td>
+                    <td>5</td>
+                    <td>₹230</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+
+        <!-- Booking Form -->
+
+        <div class="booking-form">
+
+            <h2>🎟️ Booking Details</h2>
+
+            <form id="bookingForm">
+
+                <!-- Name -->
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Customer Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your name"
+                    >
+
+                </div>
+
+
+                <!-- Movie -->
+
+                <div class="form-group">
+
+                    <label>
+                        Choose Your Movie
+                    </label>
+
+                    <div class="radio-group">
+
+                        <label class="radio-option">
+
+                            <input
+                                type="radio"
+                                name="movie"
+                                value="Ghost House"
+                                data-price="150"
+                            >
+
+                            Ghost House - ₹150
+
+                        </label>
+
+
+                        <label class="radio-option">
+
+                            <input
+                                type="radio"
+                                name="movie"
+                                value="Thalapathy Theri"
+                                data-price="230"
+                            >
+
+                            Thalapathy Theri - ₹230
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Seats -->
+
+                <div class="form-group">
+
+                    <label for="seats">
+                        Number of Seats
+                    </label>
+
+                    <input
+                        type="number"
+                        id="seats"
+                        min="1"
+                        max="5"
+                        value="1"
+                        placeholder="Enter number of seats"
+                        onchange="calculateAmount()"
+                    >
+
+                </div>
+
+
+                <!-- Total Amount -->
+
+                <div class="amount-box">
+
+                    <h3>Total Amount</h3>
+
+                    <div id="totalAmount">
+                        ₹0
+                    </div>
+
+                </div>
+
+
+                <!-- Buttons -->
+
+                <div class="buttons">
+
+                    <button
+                        type="button"
+                        class="pay-btn"
+                        onclick="payAmount()"
+                    >
+                        💳 PAY AMOUNT
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="submit-btn"
+                        onclick="submitBooking()"
+                    >
+                        ✅ SUBMIT BOOKING
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <!-- Result -->
+
+            <div id="result">
+
+                <h2>Booking Successful!</h2>
+
+                <p id="resultText"></p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+
+    <footer>
+        © 2026 Movie Ticket Booking and Reservation System
+    </footer>
+
+
+    <!-- JavaScript -->
+
+    <script>
+
+        // Calculate ticket amount
+
+        function calculateAmount() {
+
+            let movie = document.querySelector(
+                'input[name="movie"]:checked'
+            );
+
+            let seats = document.getElementById("seats").value;
+
+            if (movie && seats > 0) {
+
+                let price = movie.getAttribute("data-price");
+
+                let total = price * seats;
+
+                document.getElementById("totalAmount").innerHTML =
+                    "₹" + total;
+
+            } else {
+
+                document.getElementById("totalAmount").innerHTML =
+                    "₹0";
+
+            }
+        }
+
+
+        // Calculate when movie is selected
+
+        document.querySelectorAll(
+            'input[name="movie"]'
+        ).forEach(function(movie) {
+
+            movie.addEventListener("change", calculateAmount);
+
+        });
+
+
+        // Pay Amount
+
+        function payAmount() {
+
+            let name =
+                document.getElementById("name").value.trim();
+
+            let movie =
+                document.querySelector(
+                    'input[name="movie"]:checked'
+                );
+
+            let seats =
+                document.getElementById("seats").value;
+
+
+            if (name === "") {
+
+                alert("Please enter your name.");
+
+                return;
+            }
+
+
+            if (!movie) {
+
+                alert("Please select a movie.");
+
+                return;
+            }
+
+
+            if (seats < 1 || seats > 5) {
+
+                alert("Please select between 1 and 5 seats.");
+
+                return;
+            }
+
+
+            calculateAmount();
+
+            let total =
+                movie.getAttribute("data-price") * seats;
+
+
+            alert(
+                "Payment Amount: ₹" +
+                total +
+                "\n\nPlease proceed with the payment."
+            );
+
+        }
+
+
+        // Submit Booking
+
+        function submitBooking() {
+
+            let name =
+                document.getElementById("name").value.trim();
+
+            let movie =
+                document.querySelector(
+                    'input[name="movie"]:checked'
+                );
+
+            let seats =
+                document.getElementById("seats").value;
+
+
+            if (name === "") {
+
+                alert("Please enter your name.");
+
+                return;
+            }
+
+
+            if (!movie) {
+
+                alert("Please select a movie.");
+
+                return;
+            }
+
+
+            if (seats < 1 || seats > 5) {
+
+                alert("Please select between 1 and 5 seats.");
+
+                return;
+            }
+
+
+            let price =
+                movie.getAttribute("data-price");
+
+            let total =
+                price * seats;
+
+
+            document.getElementById("result").style.display =
+                "block";
+
+
+            document.getElementById("resultText").innerHTML =
+                "Thank you, <b>" + name + "</b>!<br><br>" +
+                "Movie: <b>" + movie.value + "</b><br>" +
+                "Number of Seats: <b>" + seats + "</b><br>" +
+                "Total Amount: <b>₹" + total + "</b><br><br>" +
+                "Your ticket booking has been confirmed.";
+
+
+            document.getElementById("result").scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>
