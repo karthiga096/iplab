@@ -1,1 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Online Examination System</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #1e293b;
+        }
+
+        /* ================= LOGIN ================= */
+
+        #loginPage {
+            display: block;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 450px;
+            margin: 50px auto;
+            padding: 35px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .login-box h1 {
+            text-align: center;
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        .login-box label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .login-box input,
+        .login-box select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 18px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .login-box input:focus,
+        .login-box select:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 13px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .login-button:hover {
+            background: #1d4ed8;
+        }
+
+
+        /* ================= EXAM ================= */
+
+        #examPage {
+            display: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(
+                135deg,
+                #1d4ed8,
+                #2563eb
+            );
+
+            color: white;
+            padding: 35px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .exam-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .exam-info span {
+            background: rgba(255,255,255,0.15);
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+
+        /* STUDENT INFO */
+
+        .student-info {
+            background: #eff6ff;
+            padding: 15px 35px;
+            color: #1e40af;
+            font-size: 14px;
+            border-bottom: 1px solid #dbeafe;
+        }
+
+
+        /* PROGRESS */
+
+        .progress-section {
+            padding: 20px 35px 0;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress {
+            width: 100%;
+            height: 100%;
+            background: #2563eb;
+        }
+
+
+        /* QUESTIONS */
+
+        .exam-form {
+            padding: 30px 35px;
+        }
+
+        .question {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 22px;
+            margin-bottom: 22px;
+        }
+
+        .question h3 {
+            font-size: 17px;
+            margin-bottom: 18px;
+            color: #0f172a;
+        }
+
+        .question label {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 13px 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .question label:hover {
+            background: #eff6ff;
+            border-color: #60a5fa;
+        }
+
+        input[type="radio"] {
+            margin-right: 12px;
+            accent-color: #2563eb;
+        }
+
+        input[type="radio"]:checked + span {
+            color: #1d4ed8;
+            font-weight: 600;
+        }
+
+
+        /* SUBMIT */
+
+        .submit-container {
+            text-align: center;
+            padding: 10px 0 20px;
+        }
+
+        .submit-button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 14px 45px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background: #1d4ed8;
+        }
+
+
+        /* FOOTER */
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8fafc;
+            color: #64748b;
+            font-size: 13px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .login-box {
+                margin: 20px auto;
+                padding: 25px 20px;
+            }
+
+            .header {
+                padding: 25px 15px;
+            }
+
+            .header h1 {
+                font-size: 25px;
+            }
+
+            .student-info {
+                padding: 15px;
+            }
+
+            .exam-form {
+                padding: 20px 15px;
+            }
+
+            .progress-section {
+                padding: 20px 15px 0;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =================================================
+     LOGIN PAGE
+================================================= -->
+
+<div id="loginPage">
+
+    <div class="login-box">
+
+        <h1>Online Examination</h1>
+
+        <p class="subtitle">
+            Student Login
+        </p>
+
+
+        <form onsubmit="startExam(event)">
+
+            <label>
+                Name
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter your name"
+                required
+            >
+
+
+            <label>
+                Department
+            </label>
+
+            <select
+                id="department"
+                name="department"
+                required
+            >
+
+                <option value="">
+                    Select Department
+                </option>
+
+                <option value="CSE">
+                    CSE
+                </option>
+
+                <option value="IT">
+                    IT
+                </option>
+
+                <option value="ECE">
+                    ECE
+                </option>
+
+                <option value="EEE">
+                    EEE
+                </option>
+
+                <option value="MECH">
+                    MECH
+                </option>
+
+                <option value="CIVIL">
+                    CIVIL
+                </option>
+
+            </select>
+
+
+            <label>
+                Roll Number
+            </label>
+
+            <input
+                type="text"
+                id="rollno"
+                name="rollno"
+                placeholder="Enter roll number"
+                required
+            >
+
+
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter email"
+                required
+            >
+
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter password"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="login-button"
+            >
+                Login
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =================================================
+     EXAM PAGE
+================================================= -->
+
+<div id="examPage">
+
+    <div class="container">
+
+
+        <!-- HEADER -->
+
+        <div class="header">
+
+            <h1>
+                Online Examination
+            </h1>
+
+            <p>
+                Computer Fundamentals & Web Technology
+            </p>
+
+
+            <div class="exam-info">
+
+                <span>
+                    📝 10 Questions
+                </span>
+
+                <span>
+                    ⏱️ Online Test
+                </span>
+
+                <span>
+                    🎯 MCQ
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- STUDENT INFORMATION -->
+
+        <div class="student-info">
+
+            <strong>
+                Student:
+            </strong>
+
+            <span id="displayName"></span>
+
+
+            &nbsp; | &nbsp;
+
+
+            <strong>
+                Department:
+            </strong>
+
+            <span id="displayDepartment"></span>
+
+
+            &nbsp; | &nbsp;
+
+
+            <strong>
+                Roll No:
+            </strong>
+
+            <span id="displayRollno"></span>
+
+        </div>
+
+
+
+        <!-- PROGRESS -->
+
+        <div class="progress-section">
+
+            <div class="progress-text">
+
+                <span>
+                    Exam Progress
+                </span>
+
+                <span>
+                    10 Questions
+                </span>
+
+            </div>
+
+
+            <div class="progress-bar">
+
+                <div class="progress"></div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- EXAM FORM -->
+
+        <form
+            action="exam"
+            method="post"
+            class="exam-form"
+        >
+
+            <!-- This tells servlet that exam is submitted -->
+
+            <input
+                type="hidden"
+                name="action"
+                value="submit"
+            >
+
+
+            <!-- STUDENT DETAILS -->
+
+            <input
+                type="hidden"
+                name="name"
+                id="hiddenName"
+            >
+
+            <input
+                type="hidden"
+                name="department"
+                id="hiddenDepartment"
+            >
+
+            <input
+                type="hidden"
+                name="rollno"
+                id="hiddenRollno"
+            >
+
+            <input
+                type="hidden"
+                name="email"
+                id="hiddenEmail"
+            >
+
+
+
+            <!-- QUESTION 1 -->
+
+            <div class="question">
+
+                <h3>
+                    1. What does HTML stand for?
+                </h3>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q1"
+                        value="a"
+                        required
+                    >
+
+                    <span>
+                        Hyper Text Markup Language
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q1"
+                        value="b"
+                    >
+
+                    <span>
+                        High Text Machine Language
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q1"
+                        value="c"
+                    >
+
+                    <span>
+                        Hyperlinks Text Mark Language
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q1"
+                        value="d"
+                    >
+
+                    <span>
+                        Home Tool Markup Language
+                    </span>
+                </label>
+
+            </div>
+
+
+
+            <!-- QUESTION 2 -->
+
+            <div class="question">
+
+                <h3>
+                    2. Which language is used to style web pages?
+                </h3>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q2"
+                        value="a"
+                        required
+                    >
+
+                    <span>
+                        HTML
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q2"
+                        value="b"
+                    >
+
+                    <span>
+                        CSS
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q2"
+                        value="c"
+                    >
+
+                    <span>
+                        Java
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q2"
+                        value="d"
+                    >
+
+                    <span>
+                        Python
+                    </span>
+                </label>
+
+            </div>
+
+
+
+            <!-- QUESTION 3 -->
+
+            <div class="question">
+
+                <h3>
+                    3. Which language is used to make web pages interactive?
+                </h3>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q3"
+                        value="a"
+                        required
+                    >
+
+                    <span>
+                        HTML
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q3"
+                        value="b"
+                    >
+
+                    <span>
+                        CSS
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q3"
+                        value="c"
+                    >
+
+                    <span>
+                        JavaScript
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q3"
+                        value="d"
+                    >
+
+                    <span>
+                        SQL
+                    </span>
+                </label>
+
+            </div>
+
+
+
+            <!-- QUESTION 4 -->
+
+            <div class="question">
+
+                <h3>
+                    4. Which tag is used to create a paragraph in HTML?
+                </h3>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q4"
+                        value="a"
+                        required
+                    >
+
+                    <span>
+                        &lt;h1&gt;
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q4"
+                        value="b"
+                    >
+
+                    <span>
+                        &lt;p&gt;
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q4"
+                        value="c"
+                    >
+
+                    <span>
+                        &lt;br&gt;
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q4"
+                        value="d"
+                    >
+
+                    <span>
+                        &lt;img&gt;
+                    </span>
+                </label>
+
+            </div>
+
+
+
+            <!-- QUESTION 5 -->
+
+            <div class="question">
+
+                <h3>
+                    5. Which symbol is used for an ID selector in CSS?
+                </h3>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q5"
+                        value="a"
+                        required
+                    >
+
+                    <span>
+                        .
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q5"
+                        value="b"
+                    >
+
+                    <span>
+                        #
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q5"
+                        value="c"
+                    >
+
+                    <span>
+                        *
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q5"
+                        value="d"
+                    >
+
+                    <span>
+                        @
+                    </span>
+                </label>
+
+            </div>
+
+
+
+            <!-- QUESTION 6 -->
+
+            <div class="question">
+
+                <h3>
+                    6. Which keyword is used to declare a variable in JavaScript?
+                </h3>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q6"
+                        value="a"
+                        required
+                    >
+
+                    <span>
+                        variable
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q6"
+                        value="b"
+                    >
+
+                    <span>
+                        int
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q6"
+                        value="c"
+                    >
+
+                    <span>
+                        var
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q6"
+                        value="d"
+                    >
+
+                    <span>
+                        string
+                    </span>
+                </label>
+
+            </div>
+
+
+
+            <!-- QUESTION 7 -->
+
+            <div class="question">
+
+                <h3>
+                    7. Which HTML tag is used to create a hyperlink?
+                </h3>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q7"
+                        value="a"
+                        required
+                    >
+
+                    <span>
+                        &lt;a&gt;
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q7"
+                        value="b"
+                    >
+
+                    <span>
+                        &lt;link&gt;
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q7"
+                        value="c"
+                    >
+
+                    <span>
+                        &lt;href&gt;
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q7"
+                        value="d"
+                    >
+
+                    <span>
+                        &lt;url&gt;
+                    </span>
+                </label>
+
+            </div>
+
+
+
+            <!-- QUESTION 8 -->
+
+            <div class="question">
+
+                <h3>
+                    8. Which property is used to change text color in CSS?
+                </h3>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q8"
+                        value="a"
+                        required
+                    >
+
+                    <span>
+                        font-color
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q8"
+                        value="b"
+                    >
+
+                    <span>
+                        text-color
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q8"
+                        value="c"
+                    >
+
+                    <span>
+                        color
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q8"
+                        value="d"
+                    >
+
+                    <span>
+                        background-color
+                    </span>
+                </label>
+
+            </div>
+
+
+
+            <!-- QUESTION 9 -->
+
+            <div class="question">
+
+                <h3>
+                    9. Which method is used to display a message in JavaScript?
+                </h3>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q9"
+                        value="a"
+                        required
+                    >
+
+                    <span>
+                        print()
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q9"
+                        value="b"
+                    >
+
+                    <span>
+                        alert()
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q9"
+                        value="c"
+                    >
+
+                    <span>
+                        display()
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q9"
+                        value="d"
+                    >
+
+                    <span>
+                        message()
+                    </span>
+                </label>
+
+            </div>
+
+
+
+            <!-- QUESTION 10 -->
+
+            <div class="question">
+
+                <h3>
+                    10. Which HTML tag is used to insert an image?
+                </h3>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q10"
+                        value="a"
+                        required
+                    >
+
+                    <span>
+                        &lt;picture&gt;
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q10"
+                        value="b"
+                    >
+
+                    <span>
+                        &lt;image&gt;
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q10"
+                        value="c"
+                    >
+
+                    <span>
+                        &lt;src&gt;
+                    </span>
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="q10"
+                        value="d"
+                    >
+
+                    <span>
+                        &lt;img&gt;
+                    </span>
+                </label>
+
+            </div>
+
+
+
+            <!-- SUBMIT -->
+
+            <div class="submit-container">
+
+                <button
+                    type="submit"
+                    class="submit-button"
+                >
+                    Submit Examination
+                </button>
+
+            </div>
+
+        </form>
+
+
+
+        <!-- FOOTER -->
+
+        <div class="footer">
+
+            © 2026 Online Examination System |
+            All Rights Reserved
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =================================================
+     JAVASCRIPT
+================================================= -->
+
+<script>
+
+function startExam(event) {
+
+    event.preventDefault();
+
+    // Get login values
+
+    let name =
+        document.getElementById("name").value;
+
+    let department =
+        document.getElementById("department").value;
+
+    let rollno =
+        document.getElementById("rollno").value;
+
+    let email =
+        document.getElementById("email").value;
+
+    let password =
+        document.getElementById("password").value;
+
+
+    // Basic validation
+
+    if (name === "") {
+        alert("Please enter your name");
+        return;
+    }
+
+    if (department === "") {
+        alert("Please select department");
+        return;
+    }
+
+    if (rollno === "") {
+        alert("Please enter roll number");
+        return;
+    }
+
+    if (email === "") {
+        alert("Please enter email");
+        return;
+    }
+
+    if (password === "") {
+        alert("Please enter password");
+        return;
+    }
+
+
+    // Display student information
+
+    document.getElementById("displayName").innerText =
+        name;
+
+    document.getElementById("displayDepartment").innerText =
+        department;
+
+    document.getElementById("displayRollno").innerText =
+        rollno;
+
+
+    // Store student information
+    // in hidden fields for servlet
+
+    document.getElementById("hiddenName").value =
+        name;
+
+    document.getElementById("hiddenDepartment").value =
+        department;
+
+    document.getElementById("hiddenRollno").value =
+        rollno;
+
+    document.getElementById("hiddenEmail").value =
+        email;
+
+
+    // Hide login
+
+    document.getElementById("loginPage").style.display =
+        "none";
+
+
+    // Show exam
+
+    document.getElementById("examPage").style.display =
+        "block";
+
+.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+</script>
+
+
+</body>
+
+</html>
+
+Servelet:
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/exam")
+public class ExamServlet extends HttpServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setContentType("text/html;charset=UTF-8");
+
+        // Student details
+        String name = request.getParameter("name");
+        String department = request.getParameter("department");
+        String rollno = request.getParameter("rollno");
+
+        // Correct answers
+        String[] correct = {
+            "a", "b", "c", "b", "b",
+            "c", "a", "c", "b", "d"
+        };
+
+        int score = 0;
+
+        // Check answers
+        for (int i = 0; i < 10; i++) {
+
+            String answer =
+                request.getParameter("q" + (i + 1));
+
+            if (answer != null &&
+                answer.equals(correct[i])) {
+
+                score++;
+            }
+        }
+
+        int percentage = score * 10;
+
+        String status;
+
+        if (percentage >= 50) {
+            status = "PASS";
+        } else {
+            status = "FAIL";
+        }
+
+        // Result page
+        response.getWriter().println(
+            "<html>" +
+            "<head>" +
+            "<title>Exam Result</title>" +
+
+            "<style>" +
+
+            "body {" +
+            "font-family: Arial;" +
+            "background: #f5f5f5;" +
+            "text-align: center;" +
+            "padding: 50px;" +
+            "}" +
+
+            ".box {" +
+            "background: white;" +
+            "max-width: 500px;" +
+            "margin: auto;" +
+            "padding: 40px;" +
+            "border-radius: 15px;" +
+            "box-shadow: 0 10px 30px #ccc;" +
+            "}" +
+
+            ".score {" +
+            "font-size: 40px;" +
+            "font-weight: bold;" +
+            "color: #2563eb;" +
+            "margin: 20px;" +
+            "}" +
+
+            ".pass {" +
+            "color: green;" +
+            "}" +
+
+            ".fail {" +
+            "color: red;" +
+            "}" +
+
+            "</style>" +
+            "</head>" +
+
+            "<body>" +
+
+            "<div class='box'>" +
+
+            "<h1>Online Examination</h1>" +
+
+            "<h3>Student Name: " +
+            name +
+            "</h3>" +
+
+            "<h3>Department: " +
+            department +
+            "</h3>" +
+
+            "<h3>Roll Number: " +
+            rollno +
+            "</h3>" +
+
+            "<hr>" +
+
+            "<h2>Examination Result</h2>" +
+
+            "<div class='score'>" +
+            score +
+            " / 10" +
+            "</div>" +
+
+            "<h3>Percentage: " +
+            percentage +
+            "%</h3>" +
+
+            "<h2 class='" +
+            (status.equals("PASS") ? "pass" : "fail") +
+            "'>" +
+            status +
+            "</h2>" +
+
+            "<br>" +
+
+            "<a href='index.html'>Back to Login</a>" +
+
+            "</div>" +
+
+            "</body>" +
+
+            "</html>"
+        );
+    }
+}
