@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Shopping System</title>
+</head>
+<!-- Added background image using inline CSS selector, with a pink fall-back color -->
+<body style="background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgC-SvRX3Nrx6F0JyMxYzE7TISCEDQzdER8CiRR0z_gw&s=10') no-repeat center center fixed; background-size: cover; font-family: 'Arial', sans-serif; background-color: pink; margin: 0; padding: 20px;">
+<div style="background: rgba(255, 255, 255, 0.9); max-width: 450px; margin: 50px auto; padding: 30px; border-radius: 16px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); text-align: center;">
+<h1 style="border: 2px solid violet; color: #ff3366; padding: 10px; border-radius: 8px; font-size: 1.8em; margin-bottom: 20px;">Welcome To The Shopping World</h1>
+<h2 style="color: red; margin-bottom: 20px;">Signup here!!</h2>
+<!-- Interactive form structure -->
+<form onsubmit="showSuccessAlert(event)">
+<div style="margin-bottom: 15px;">
+<label style="font-weight: bold; color: #333;">Enter Your Name:</label><br>
+<input type="text" required style="width: 80%; padding: 10px; margin-top: 5px; border: 1px solid #ffccd8; border-radius: 6px; outline: none;">
+</div>
+<div style="margin-bottom: 15px;">
+<label style="font-weight: bold; color: #333;">Email:</label><br>
+<input type="email" required style="width: 80%; padding: 10px; margin-top: 5px; border: 1px solid #ffccd8; border-radius: 6px; outline: none;">
+</div>
+<div style="margin-bottom: 15px;">
+<label style="font-weight: bold; color: #333;">Phone no:</label><br>
+<input type="tel" required style="width: 80%; padding: 10px; margin-top: 5px; border: 1px solid #ffccd8; border-radius: 6px; outline: none;">
+</div>
+<div style="margin-bottom: 20px;">
+<label style="font-weight: bold; color: #333;">Enter Otp:</label><br>
+<input type="text" required style="width: 80%; padding: 10px; margin-top: 5px; border: 1px solid #ffccd8; border-radius: 6px; outline: none;">
+</div>
+<!-- Signup Action Button -->
+<button type="submit" style="background-color: #ff3366; color: white; border: none; padding: 12px 30px; font-size: 1em; font-weight: bold; border-radius: 8px; cursor: pointer; transition: 0.3s; margin-bottom: 15px;">
+Submit Registration
+</button>
+</form>
+<p style="color: green; font-weight: bold; margin-bottom: 15px;">Registration Successfully Finished!!</p>
+<a href="ex2logiin.html" style="color: #ff3366; text-decoration: none; font-weight: bold;">go to login page</a>
+</div>
+<!-- JavaScript function to trigger the popup alert message -->
+ <script>
+function showSuccessAlert(event) {
+event.preventDefault(); // Prevents the page from refreshing on submit
+alert("🎉 Awesome! Registration Successfully Finished! Welcome to our store.");
+}
+</script>
+</body>
+</html>
