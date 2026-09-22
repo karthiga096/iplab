@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Portal Registration</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f0f8ff;
+}
+
+h1{
+    text-align:center;
+    background:#0077cc;
+    color:white;
+    padding:15px;
+}
+
+table{
+    width:550px;
+    margin:30px auto;
+    background:white;
+    border-collapse:collapse;
+    box-shadow:0 0 10px gray;
+}
+
+td{
+    padding:12px;
+    border:1px solid #ddd;
+    vertical-align:top;
+}
+
+th{
+    background:#0077cc;
+    color:white;
+    padding:15px;
+    font-size:22px;
+}
+
+input{
+    width:100%;
+    padding:8px;
+    border:1px solid #999;
+    border-radius:5px;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    background:#0077cc;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#005fa3;
+}
+
+.error{
+    color:red;
+    font-size:13px;
+    margin-top:5px;
+    display:block;
+}
+
+#msg{
+    text-align:center;
+    color:green;
+    font-weight:bold;
+    padding:10px;
+}
+</style>
+
+</head>
+<body>
+
+<h1>💼 Job Registration Portal</h1>
+
+<form id="form">
+
+<table>
+
+<tr>
+<th colspan="2">Job Seeker Registration</th>
+</tr>
+
+<tr>
+<td>Full Name *</td>
+<td>
+<input type="text" id="name">
+<span class="error" id="nameError"></span>
+</td>
+</tr>
+
+<tr>
+<td>Email *</td>
+<td>
+<input type="email" id="email">
+<span class="error" id="emailError"></span>
+</td>
+</tr>
+
+<tr>
+<td>Phone Number *</td>
+<td>
+<input type="text" id="phone">
+<span class="error" id="phoneError"></span>
+</td>
+</tr>
+
+<tr>
+<td>Password *</td>
+<td>
+<input type="password" id="password">
+<span class="error" id="passwordError"></span>
+</td>
+</tr>
+
+<tr>
+<td>Desired Job Title *</td>
+<td>
+<input type="text" id="job">
+<span class="error" id="jobError"></span>
+</td>
+</tr>
+
+<tr>
+<td>Years of Experience *</td>
+<td>
+<input type="number" id="exp">
+<span class="error" id="expError"></span>
+</td>
+</tr>
+
+<tr>
+<td>LinkedIn Profile *</td>
+<td>
+<input type="url" id="linkedin">
+<span class="error" id="linkedinError"></span>
+</td>
+</tr>
+
+<tr>
+<td>Upload Resume *</td>
+<td>
+<input type="file" id="resume" accept=".pdf,.doc,.docx">
+<span class="error" id="resumeError"></span>
+</td>
+</tr>
+
+<tr>
+<td colspan="2">
+<button type="submit">Register</button>
+</td>
+</tr>
+
+<tr>
+<td colspan="2" id="msg"></td>
+</tr>
+
+</table>
+
+</form>
+
+<script>
+
+document.getElementById("form").addEventListener("submit", function(e){
+
+e.preventDefault();
+
+// Clear old errors
+document.getElementById("nameError").innerHTML="";
+document.getElementById("emailError").innerHTML="";
+document.getElementById("phoneError").innerHTML="";
+document.getElementById("passwordError").innerHTML="";
+document.getElementById("jobError").innerHTML="";
+document.getElementById("expError").innerHTML="";
+document.getElementById("linkedinError").innerHTML="";
+document.getElementById("resumeError").innerHTML="";
+document.getElementById("msg").innerHTML="";
+
+let valid=true;
+
+let name=document.getElementById("name").value.trim();
+let email=document.getElementById("email").value.trim();
+let phone=document.getElementById("phone").value.trim();
+let password=document.getElementById("password").value.trim();
+let job=document.getElementById("job").value.trim();
+let exp=document.getElementById("exp").value.trim();
+let linkedin=document.getElementById("linkedin").value.trim();
+let resume=document.getElementById("resume").files;
+
+if(name==""){
+document.getElementById("nameError").innerHTML="* Full Name is required";
+valid=false;
+}
+
+if(email==""){
+document.getElementById("emailError").innerHTML="* Email is required";
+valid=false;
+}
+
+if(phone==""){
+document.getElementById("phoneError").innerHTML="* Phone Number is required";
+valid=false;
+}
+else if(phone.length!=10 || isNaN(phone)){
+document.getElementById("phoneError").innerHTML="* Enter a valid 10-digit phone number";
+valid=false;
+}
+
+if(password==""){
+document.getElementById("passwordError").innerHTML="* Password is required";
+valid=false;
+}
+else if(password.length<6){
+document.getElementById("passwordError").innerHTML="* Password must contain at least 6 characters";
+valid=false;
+}
+
+if(job==""){
+document.getElementById("jobError").innerHTML="* Desired Job Title is required";
+valid=false;
+}
+
+if(exp==""){
+document.getElementById("expError").innerHTML="* Experience is required";
+valid=false;
+}
+else if(exp<0){
+document.getElementById("expError").innerHTML="* Experience cannot be negative";
+valid=false;
+}
+
+if(linkedin==""){
+document.getElementById("linkedinError").innerHTML="* LinkedIn Profile is required";
+valid=false;
+}
+
+if(resume.length==0){
+document.getElementById("resumeError").innerHTML="* Please upload your Resume";
+valid=false;
+}
+
+if(valid){
+document.getElementById("msg").innerHTML="✅ Registration Successful!";
+document.getElementById("form").reset();
+}
+
+});
+
+</script>
+
+</body>
+</html>
