@@ -1,1 +1,122 @@
-
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>Session Tracking</title> 
+ 
+    <style> 
+        * { 
+            box-sizing: border-box; 
+        } 
+ 
+        body { 
+            margin: 0; 
+            font-family: Arial, sans-serif; 
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5); 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+        } 
+ 
+        .container { 
+            width: 400px; 
+            background: white; 
+            padding: 35px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
+        } 
+ 
+        h1 { 
+            text-align: center; 
+            color: #2c3e50; 
+            margin-bottom: 10px; 
+        } 
+ 
+        .subtitle { 
+            text-align: center; 
+            color: #777; 
+            margin-bottom: 25px; 
+        } 
+ 
+        label { 
+            font-weight: bold; 
+            color: #34495e; 
+        } 
+ 
+        input[type="text"], 
+        input[type="password"] { 
+            width: 100%; 
+            padding: 12px; 
+            margin-top: 8px; 
+            margin-bottom: 18px; 
+            border: 1px solid #ccc; 
+            border-radius: 8px; 
+            font-size: 15px; 
+        } 
+ 
+        input[type="text"]:focus, 
+        input[type="password"]:focus { 
+            border-color: #3498db; 
+            outline: none; 
+        } 
+ 
+        input[type="submit"] { 
+            width: 100%; 
+            padding: 12px; 
+            border: none; 
+            border-radius: 8px; 
+            background: #3498db; 
+            color: white; 
+            font-size: 16px; 
+            font-weight: bold; 
+            cursor: pointer; 
+        } 
+ 
+        input[type="submit"]:hover { 
+            background: #2980b9; 
+        } 
+ 
+        .info { 
+            margin-top: 20px; 
+            padding: 12px; 
+            background: #f2f6fa; 
+            border-radius: 8px; 
+            text-align: center; 
+            color: #555; 
+            font-size: 13px; 
+        } 
+    </style> 
+</head> 
+ 
+<body> 
+ 
+<div class="container"> 
+ 
+    <h1>Session Tracking</h1> 
+ 
+    <p class="subtitle"> 
+        Java Servlet Demonstration 
+    </p> 
+ 
+    <form action="WelcomeServlet" method="post"> 
+ 
+        <label>Username</label> 
+        <input type="text" name="uname" 
+               placeholder="Enter your username" required> 
+ 
+        <label>Password</label> 
+        <input type="password" name="pwd" 
+               placeholder="Enter your password" required> 
+ 
+        <input type="submit" value="Login"> 
+ 
+    </form> 
+ 
+    <div class="info"> 
+        Hidden Form Field &nbsp; | &nbsp; URL Rewriting 
+    </div> 
+ 
+</div> 
+ 
+</body> 
+</html> 
