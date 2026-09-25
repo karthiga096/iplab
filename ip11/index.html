@@ -1,1 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Online Shopping System</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ffe4ec, #e3f2fd);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Navigation */
+
+        .top-navbar {
+            background: white;
+            max-width: 900px;
+            margin: 0 auto 25px;
+            padding: 15px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-weight: bold;
+            font-size: 22px;
+            color: #ff3366;
+        }
+
+        .auth-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            font-weight: bold;
+            padding: 9px 16px;
+            border-radius: 6px;
+        }
+
+        .login-btn {
+            color: #333;
+        }
+
+        .login-btn:hover {
+            color: #ff3366;
+        }
+
+        .signup-btn {
+            background-color: #ff3366;
+            color: white;
+        }
+
+        /* Header */
+
+        .header-container {
+            background: white;
+            max-width: 900px;
+            margin: 0 auto 30px;
+            padding: 45px 35px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        .header-container h1 {
+            color: #ff3366;
+            margin-bottom: 15px;
+            font-size: 35px;
+        }
+
+        .header-container p {
+            font-size: 18px;
+            margin-bottom: 25px;
+            color: #555;
+        }
+
+        /* Search */
+
+        .search-bar-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .search-bar-container input {
+            width: 65%;
+            padding: 13px 16px;
+            border: 2px solid #ff3366;
+            border-radius: 8px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        #search-btn {
+            padding: 13px 25px;
+            background-color: #ff3366;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #search-btn:hover {
+            background-color: #e60039;
+        }
+
+        /* Common Sections */
+
+        #about-section,
+        .main-content,
+        .form-section {
+            background: white;
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 30px 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        #about-section {
+            border-left: 7px solid #ff3366;
+        }
+
+        #about-section h2,
+        .main-content h2 {
+            color: #222;
+            margin-bottom: 18px;
+            font-size: 27px;
+        }
+
+        #about-section p {
+            line-height: 1.8;
+            color: #555;
+            font-size: 16px;
+        }
+
+        /* Categories */
+
+        .main-content {
+            text-align: center;
+        }
+
+        .category-grid {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .category-box {
+            background-color: white;
+            padding: 20px;
+            border: 2px solid #ffccd8;
+            border-radius: 15px;
+            width: 260px;
+            transition: 0.3s;
+        }
+
+        .category-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 51, 102, 0.2);
+            border-color: #ff3366;
+        }
+
+        .category-box a {
+            text-decoration: none;
+            color: #ff3366;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .category-box img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+
+        .category-box h3 {
+            margin: 10px 0;
+            color: #333;
+        }
+
+        /* Forms */
+
+        .form-section {
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .form-section h2 {
+            color: #ff3366;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 7px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ffccd8;
+            border-radius: 7px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #ff3366;
+        }
+
+        .form-button {
+            background-color: #ff3366;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .form-button:hover {
+            background-color: #e60039;
+        }
+
+        .payment {
+            margin: 15px 0 20px;
+            line-height: 2;
+            text-align: left;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .product-price {
+            color: #ff3366;
+            font-weight: bold;
+            font-size: 18px;
+            margin: 10px;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .search-bar-container {
+                flex-direction: column;
+            }
+
+            .search-bar-container input {
+                width: 100%;
+            }
+
+            #search-btn {
+                width: 100%;
+            }
+
+            #about-section,
+            .main-content,
+            .form-section {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+
+    <script>
+
+        function showSection(id) {
+
+            document.getElementById("signup").classList.add("hidden");
+            document.getElementById("login").classList.add("hidden");
+            document.getElementById("dresses").classList.add("hidden");
+            document.getElementById("electronics").classList.add("hidden");
+            document.getElementById("order").classList.add("hidden");
+
+            document.getElementById(id).classList.remove("hidden");
+
+            document.getElementById(id).scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+
+        function setProduct(product, price) {
+
+            document.getElementById("product").value = product;
+            document.getElementById("price").value = price;
+
+        }
+
+        function registrationMessage() {
+
+            alert("Registration Successfully Finished! Welcome to QuickShop.");
+
+        }
+
+        function searchProduct() {
+
+            var search = document.getElementById("search").value.toLowerCase();
+
+            if (search.includes("dress")) {
+
+                showSection("dresses");
+
+            } else if (
+                search.includes("electronic") ||
+                search.includes("headphone") ||
+                search.includes("watch")
+            ) {
+
+                showSection("electronics");
+
+            } else {
+
+                alert(
+                    "Product not found. Try Dress, Headphones or Smart Watch."
+                );
+
+            }
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav class="top-navbar">
+
+        <div class="nav-container">
+
+            <span class="nav-logo">
+                ⚡ QuickShop
+            </span>
+
+            <div class="auth-links">
+
+                <a href="#"
+                   class="nav-link login-btn"
+                   onclick="showSection('login'); return false;">
+                    Log In
+                </a>
+
+                <a href="#"
+                   class="nav-link signup-btn"
+                   onclick="showSection('signup'); return false;">
+                    Sign Up
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- HOME -->
+
+    <header class="header-container">
+
+        <h1>
+            Welcome to Our Online Store!
+        </h1>
+
+        <p>
+            Buy your favorite products like dresses and electronics.
+            Enjoy your shopping experience.
+        </p>
+
+        <div class="search-bar-container">
+
+            <input
+                type="text"
+                id="search"
+                placeholder="Search for products, brands..."
+            >
+
+            <button
+                type="button"
+                id="search-btn"
+                onclick="searchProduct()"
+            >
+                Search
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ABOUT -->
+
+    <section id="about-section">
+
+        <h2>
+            About Our Platform
+        </h2>
+
+        <p>
+            Welcome to the <strong>Online Shopping System</strong>!
+            We are dedicated to providing you with a premium virtual
+            shopping space. By focusing on quality and absolute convenience,
+            we bring trendsetting dresses and next-generation electronics
+            directly to your fingertips.
+        </p>
+
+    </section>
+
+
+    <!-- CATEGORIES -->
+
+    <section class="main-content">
+
+        <h2>
+            Shop by Categories
+        </h2>
+
+        <div class="category-grid">
+
+            <!-- DRESSES -->
+
+            <div class="category-box">
+
+                <a href="#"
+                   onclick="showSection('dresses'); return false;">
+
+                    <img
+                        src="https://static.vecteezy.com/system/resources/thumbnails/026/680/634/small/pink-female-dress-mock-up-isolated-on-white-background-ai-generative-photo.jpg"
+                        alt="Dresses"
+                    >
+
+                    <p>
+                        👗 Dresses
+                    </p>
+
+                </a>
+
+            </div>
+
+
+            <!-- ELECTRONICS -->
+
+            <div class="category-box">
+
+                <a href="#"
+                   onclick="showSection('electronics'); return false;">
+
+                    <img
+                        src="https://img.magnific.com/free-photo/modern-stationary-collection-arrangement_23-2149309649.jpg?semt=ais_hybrid&w=740&q=80"
+                        alt="Electronics"
+                    >
+
+                    <p>
+                        💻 Electronics
+                    </p>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SIGN UP -->
+
+    <section id="signup" class="form-section hidden">
+
+        <h2>
+            Welcome To The Shopping World
+        </h2>
+
+        <h2>
+            Signup Here!!
+        </h2>
+
+        <form action="product.php" method="POST">
+
+            <input type="hidden" name="action" value="signup">
+
+            <div class="form-group">
+
+                <label>
+                    Enter Your Name:
+                </label>
+
+                <input
+                    type="text"
+                    name="name"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Email:
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Phone No:
+                </label>
+
+                <input
+                    type="tel"
+                    name="phone"
+                    pattern="[0-9]{10}"
+                    maxlength="10"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Password:
+                </label>
+
+                <input
+                    type="password"
+                    name="password"
+                    minlength="8"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Enter OTP:
+                </label>
+
+                <input
+                    type="text"
+                    name="otp"
+                    required
+                >
+
+            </div>
+
+            <button
+                class="form-button"
+                type="submit"
+            >
+                Submit Registration
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- LOGIN -->
+
+    <section id="login" class="form-section hidden">
+
+        <h2>
+            Login Here!!
+        </h2>
+
+        <form action="product.php" method="POST">
+
+            <input type="hidden" name="action" value="login">
+
+            <div class="form-group">
+
+                <label>
+                    Email:
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    Password:
+                </label>
+
+                <input
+                    type="password"
+                    name="password"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <input
+                    type="submit"
+                    value="Submit"
+                    class="form-button"
+                >
+
+            </div>
+
+        </form>
+
+        <p style="color:#666; margin:15px;">
+            Forgot password
+        </p>
+
+    </section>
+
+
+    <!-- DRESSES -->
+
+    <section id="dresses" class="main-content hidden">
+
+        <h2>
+            Dresses Collection
+        </h2>
+
+        <div class="category-grid">
+
+            <!-- WOMEN DRESS -->
+
+            <div class="category-box">
+
+                <img
+                    src="https://images.unsplash.com/photo-1732709470611-670308da8c5e?q=80&w=880&auto=format&fit=crop"
+                    alt="Women's Dress"
+                >
+
+                <h3>
+                    Women's Dress
+                </h3>
+
+                <p class="product-price">
+                    ₹799
+                </p>
+
+                <button
+                    class="form-button"
+                    onclick="setProduct('Women Dress','799'); showSection('order')"
+                >
+                    Place Order
+                </button>
+
+            </div>
+
+
+            <!-- PARTY DRESS -->
+
+            <div class="category-box">
+
+                <img
+                    src="https://images.unsplash.com/photo-1546804784-896d0dca3805?q=80&w=1170&auto=format&fit=crop"
+                    alt="Party Dress"
+                >
+
+                <h3>
+                    Party Dress
+                </h3>
+
+                <p class="product-price">
+                    ₹1299
+                </p>
+
+                <button
+                    class="form-button"
+                    onclick="setProduct('Party Dress','1299'); showSection('order')"
+                >
+                    Place Order
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ELECTRONICS -->
+
+    <section id="electronics" class="main-content hidden">
+
+        <h2>
+            Electronics Collection
+        </h2>
+
+        <div class="category-grid">
+
+            <!-- HEADPHONES -->
+
+            <div class="category-box">
+
+                <img
+                    src="https://img.magnific.com/free-photo/modern-stationary-collection-arrangement_23-2149309649.jpg?semt=ais_hybrid&w=740&q=80"
+                    alt="Headphones"
+                >
+
+                <h3>
+                    Headphones
+                </h3>
+
+                <p class="product-price">
+                    ₹1499
+                </p>
+
+                <button
+                    class="form-button"
+                    onclick="setProduct('Headphones','1499'); showSection('order')"
+                >
+                    Place Order
+                </button>
+
+            </div>
+
+
+            <!-- SMART WATCH -->
+
+            <div class="category-box">
+
+                <img
+                    src="https://img.magnific.com/free-photo/modern-stationary-collection-arrangement_23-2149309649.jpg?semt=ais_hybrid&w=740&q=80"
+                    alt="Smart Watch"
+                >
+
+                <h3>
+                    Smart Watch
+                </h3>
+
+                <p class="product-price">
+                    ₹2499
+                </p>
+
+                <button
+                    class="form-button"
+                    onclick="setProduct('Smart Watch','2499'); showSection('order')"
+                >
+                    Place Order
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ORDER -->
+
+    <section id="order" class="form-section hidden">
+
+        <h2>
+            Place Your Order
+        </h2>
+
+        <form action="product.php" method="POST">
+
+            <input type="hidden" name="action" value="order">
+
+
+            <div class="form-group">
+
+                <label>
+                    Product:
+                </label>
+
+                <input
+                    type="text"
+                    id="product"
+                    name="product"
+                    readonly
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Price:
+                </label>
+
+                <input
+                    type="text"
+                    id="price"
+                    name="price"
+                    readonly
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Quantity:
+                </label>
+
+                <input
+                    type="number"
+                    name="quantity"
+                    value="1"
+                    min="1"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Your Name:
+                </label>
+
+                <input
+                    type="text"
+                    name="customer_name"
+                    placeholder="Enter your name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Phone Number:
+                </label>
+
+                <input
+                    type="tel"
+                    name="customer_phone"
+                    pattern="[0-9]{10}"
+                    maxlength="10"
+                    placeholder="Enter 10 digit phone number"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Delivery Address:
+                </label>
+
+                <textarea
+                    name="address"
+                    rows="4"
+                    placeholder="Enter delivery address"
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <div class="payment">
+
+                <strong>
+                    Payment Method
+                </strong>
+
+                <br>
+
+                <input
+                    type="radio"
+                    name="payment"
+                    value="Cash on Delivery"
+                    required
+                >
+                Cash on Delivery
+
+                <br>
+
+                <input
+                    type="radio"
+                    name="payment"
+                    value="UPI"
+                >
+                UPI Method/Card
+
+                <br>
+
+                <input
+                    type="radio"
+                    name="payment"
+                    value="Credit/Debit Card"
+                >
+                Credit/Debit Card
+
+            </div>
+
+
+            <button
+                class="form-button"
+                type="submit"
+            >
+                Place Order
+            </button>
+
+        </form>
+
+    </section>
+
+</body>
+
+</html>
