@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<orders>
+
+    <order>
+        <orderId>1001</orderId>
+        <customer>Karthika</customer>
+        <product>Women Dress</product>
+        <price>799</price>
+        <quantity>1</quantity>
+        <payment>Cash on Delivery</payment>
+        <address>Virudhunagar</address>
+    </order>
+
+    <order>
+        <orderId>1002</orderId>
+        <customer>Priya</customer>
+        <product>Party Dress</product>
+        <price>1299</price>
+        <quantity>2</quantity>
+        <payment>UPI</payment>
+        <address>Madurai</address>
+    </order>
+
+    <order>
+        <orderId>1003</orderId>
+        <customer>Rahul</customer>
+        <product>Headphones</product>
+        <price>1499</price>
+        <quantity>1</quantity>
+        <payment>Credit/Debit Card</payment>
+        <address>Chennai</address>
+    </order>
+
+    <order>
+        <orderId>1004</orderId>
+        <customer>Divya</customer>
+        <product>Smart Watch</product>
+        <price>2499</price>
+        <quantity>1</quantity>
+        <payment>UPI</payment>
+        <address>Coimbatore</address>
+    </order>
+
+    <order>
+        <orderId>1005</orderId>
+        <customer>Arun</customer>
+        <product>Women Dress</product>
+        <price>799</price>
+        <quantity>2</quantity>
+        <payment>Cash on Delivery</payment>
+        <address>Theni</address>
+    </order>
+
+    <order>
+        <orderId>1006</orderId>
+        <customer>Meena</customer>
+        <product>Party Dress</product>
+        <price>1299</price>
+        <quantity>1</quantity>
+        <payment>UPI</payment>
+        <address>Tirunelveli</address>
+    </order>
+
+    <order>
+        <orderId>1007</orderId>
+        <customer>Suresh</customer>
+        <product>Headphones</product>
+        <price>1499</price>
+        <quantity>2</quantity>
+        <payment>Credit/Debit Card</payment>
+        <address>Salem</address>
+    </order>
+
+    <order>
+        <orderId>1008</orderId>
+        <customer>Anitha</customer>
+        <product>Smart Watch</product>
+        <price>2499</price>
+        <quantity>1</quantity>
+        <payment>Cash on Delivery</payment>
+        <address>Trichy</address>
+    </order>
+
+    <order>
+        <orderId>1009</orderId>
+        <customer>Vijay</customer>
+        <product>Headphones</product>
+        <price>1499</price>
+        <quantity>1</quantity>
+        <payment>UPI</payment>
+        <address>Chennai</address>
+    </order>
+
+    <order>
+        <orderId>1010</orderId>
+        <customer>Keerthi</customer>
+        <product>Party Dress</product>
+        <price>1299</price>
+        <quantity>3</quantity>
+        <payment>Cash on Delivery</payment>
+        <address>Madurai</address>
+    </order>
+
+</orders>
