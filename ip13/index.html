@@ -1,1 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>QuickShop - AJAX XML Shopping System</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #fff1f5, #f3f7ff);
+    color: #333;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* NAVBAR */
+
+.top-navbar {
+    max-width: 1100px;
+    margin: auto;
+    background: white;
+    padding: 16px 25px;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #e91e63;
+}
+
+.auth-links {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-link {
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-btn {
+    color: #333;
+}
+
+.signup-btn {
+    background: #e91e63;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+}
+
+/* HEADER */
+
+.header-container {
+    max-width: 1100px;
+    margin: 25px auto;
+    background: white;
+    padding: 50px 40px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+}
+
+.header-container h1 {
+    font-size: 38px;
+    color: #e91e63;
+    margin-bottom: 15px;
+}
+
+.header-container p {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* SEARCH */
+
+.search-bar-container {
+    display: flex;
+    gap: 10px;
+    max-width: 700px;
+    margin: auto;
+}
+
+.search-bar-container input {
+    flex: 1;
+    padding: 14px;
+    border: 2px solid #f8bbd0;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+#search-btn {
+    padding: 14px 25px;
+    border: none;
+    border-radius: 8px;
+    background: #e91e63;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* COMMON */
+
+#about-section,
+.main-content {
+    max-width: 1100px;
+    margin: 25px auto;
+    background: white;
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+}
+
+#about-section {
+    border-left: 7px solid #e91e63;
+}
+
+#about-section h2,
+.main-content h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+#about-section p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #555;
+}
+
+/* CATEGORY */
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    max-width: 850px;
+    margin: auto;
+}
+
+.category-box {
+    background: white;
+    border: 1px solid #f8bbd0;
+    border-radius: 15px;
+    padding: 18px;
+    text-align: center;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.category-box img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.category-box h3 {
+    margin: 8px 0;
+}
+
+.category-box a {
+    text-decoration: none;
+    color: #e91e63;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* FORM */
+
+.form-section {
+    max-width: 550px;
+    margin: 25px auto;
+    background: white;
+    padding: 35px 45px;
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.form-section h2 {
+    text-align: center;
+    color: #e91e63;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.form-button {
+    width: 100%;
+    padding: 13px;
+    background: #e91e63;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.form-button:hover {
+    background: #c2185b;
+}
+
+.product-price {
+    color: #e91e63;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 12px;
+}
+
+.payment {
+    background: #fff7fa;
+    border: 1px solid #f8bbd0;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 20px 0;
+    line-height: 2;
+}
+
+.payment strong {
+    color: #e91e63;
+}
+
+/* ORDERS */
+
+.orders-section {
+    max-width: 1100px;
+    margin: 25px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+}
+
+.orders-section h2 {
+    text-align: center;
+    color: #e91e63;
+    margin-bottom: 20px;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+#ordersTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#ordersTable th {
+    background: #e91e63;
+    color: white;
+    padding: 13px;
+}
+
+#ordersTable td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+#ordersTable tr:nth-child(even) {
+    background: #fff5f8;
+}
+
+#ordersTable tr:hover {
+    background: #ffe4ed;
+}
+
+/* FOOTER */
+
+footer {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 14px;
+    text-align: center;
+    color: #666;
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .nav-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .header-container {
+        padding: 35px 20px;
+    }
+
+    .header-container h1 {
+        font-size: 28px;
+    }
+
+    .search-bar-container {
+        flex-direction: column;
+    }
+
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-section {
+        padding: 30px 20px;
+    }
+
+}
+
+</style>
+
+
+<script>
+
+/* ================= SHOW SECTION ================= */
+
+function showSection(id) {
+
+    var sections = [
+        "signup",
+        "login",
+        "dresses",
+        "electronics",
+        "order"
+    ];
+
+    for (var i = 0; i < sections.length; i++) {
+
+        document.getElementById(sections[i])
+            .classList.add("hidden");
+    }
+
+    document.getElementById(id)
+        .classList.remove("hidden");
+
+    document.getElementById(id)
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+}
+
+
+/* ================= PRODUCT ================= */
+
+function setProduct(product, price) {
+
+    document.getElementById("product").value = product;
+
+    document.getElementById("price").value = price;
+
+    showSection("order");
+}
+
+
+/* ================= SEARCH ================= */
+
+function searchProduct() {
+
+    var search =
+        document.getElementById("search").value.toLowerCase();
+
+    if (search.includes("dress")) {
+
+        showSection("dresses");
+
+    }
+    else if (
+        search.includes("electronic") ||
+        search.includes("headphone") ||
+        search.includes("watch")
+    ) {
+
+        showSection("electronics");
+
+    }
+    else {
+
+        alert(
+            "Product not found. Try Dress, Headphones or Smart Watch."
+        );
+
+    }
+}
+
+
+/* ================= AJAX + XML ================= */
+
+function loadOrders() {
+
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+
+        if (this.readyState == 4) {
+
+            if (this.status == 200) {
+
+                displayXMLOrders(this);
+
+            }
+            else {
+
+                alert("Unable to load order.xml");
+
+            }
+
+        }
+
+    };
+
+    xhttp.open("GET", "orders.xml", true);
+
+    xhttp.send();
+}
+
+
+/* ================= DISPLAY XML ORDERS ================= */
+
+function displayXMLOrders(xml) {
+
+    var xmlDoc = xml.responseXML;
+
+    var orders =
+        xmlDoc.getElementsByTagName("order");
+
+    var table =
+        document.getElementById("ordersTable");
+
+
+    /* Remove old rows except heading */
+
+    while (table.rows.length > 1) {
+
+        table.deleteRow(1);
+
+    }
+
+
+    /* Display 10 XML records */
+
+    for (var i = 0; i < orders.length; i++) {
+
+        var row =
+            table.insertRow(-1);
+
+
+        row.insertCell(0).innerHTML =
+            orders[i]
+            .getElementsByTagName("orderId")[0]
+            .textContent;
+
+
+        row.insertCell(1).innerHTML =
+            orders[i]
+            .getElementsByTagName("customer")[0]
+            .textContent;
+
+
+        row.insertCell(2).innerHTML =
+            orders[i]
+            .getElementsByTagName("product")[0]
+            .textContent;
+
+
+        row.insertCell(3).innerHTML =
+            "₹" +
+            orders[i]
+            .getElementsByTagName("price")[0]
+            .textContent;
+
+
+        row.insertCell(4).innerHTML =
+            orders[i]
+            .getElementsByTagName("quantity")[0]
+            .textContent;
+
+
+        row.insertCell(5).innerHTML =
+            orders[i]
+            .getElementsByTagName("payment")[0]
+            .textContent;
+
+
+        row.insertCell(6).innerHTML =
+            orders[i]
+            .getElementsByTagName("address")[0]
+            .textContent;
+
+    }
+
+}
+
+
+/* ================= NEW ORDER ================= */
+
+function orderMessage() {
+
+    var product =
+        document.getElementById("product").value;
+
+    var price =
+        document.getElementById("price").value;
+
+    var quantity =
+        document.getElementById("quantity").value;
+
+    var name =
+        document.getElementById("customerName").value;
+
+    var address =
+        document.getElementById("address").value;
+
+    var payment =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        ).value;
+
+
+    var table =
+        document.getElementById("ordersTable");
+
+
+    /* Add new order to same table */
+
+    var row =
+        table.insertRow(-1);
+
+
+    row.insertCell(0).innerHTML =
+        "NEW-" +
+        Math.floor(Math.random() * 9000 + 1000);
+
+
+    row.insertCell(1).innerHTML =
+        name;
+
+
+    row.insertCell(2).innerHTML =
+        product;
+
+
+    row.insertCell(3).innerHTML =
+        "₹" + price;
+
+
+    row.insertCell(4).innerHTML =
+        quantity;
+
+
+    row.insertCell(5).innerHTML =
+        payment;
+
+
+    row.insertCell(6).innerHTML =
+        address;
+
+
+    alert("Order Successfully Placed!");
+
+
+    /* Clear order form */
+
+    document.getElementById("quantity").value = 1;
+
+    document.getElementById("customerName").value = "";
+
+    document.getElementById("address").value = "";
+
+    document.querySelector(
+        'input[name="payment"]:checked'
+    ).checked = false;
+
+
+    return false;
+}
+
+
+/* ================= SIGNUP ================= */
+
+function registrationMessage() {
+
+    alert("Registration Successfully Finished!");
+
+    return false;
+}
+
+
+/* ================= LOGIN ================= */
+
+function loginMessage() {
+
+    alert("Login Successful!");
+
+    return false;
+}
+
+
+/* ================= PAGE LOAD ================= */
+
+window.onload = function() {
+
+    loadOrders();
+
+};
+
+</script>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav class="top-navbar">
+
+    <div class="nav-container">
+
+        <div class="nav-logo">
+            ⚡ QuickShop
+        </div>
+
+        <div class="auth-links">
+
+            <a href="#"
+               class="nav-link login-btn"
+               onclick="showSection('login'); return false;">
+                Log In
+            </a>
+
+            <a href="#"
+               class="nav-link signup-btn"
+               onclick="showSection('signup'); return false;">
+                Sign Up
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- HOME -->
+
+<header class="header-container">
+
+    <h1>
+        Welcome to Our Online Store!
+    </h1>
+
+    <p>
+        Buy your favorite products like dresses and electronics.
+        <br>
+        Enjoy a simple and convenient shopping experience.
+    </p>
+
+    <div class="search-bar-container">
+
+        <input
+            type="text"
+            id="search"
+            placeholder="Search for products, brands...">
+
+        <button
+            type="button"
+            id="search-btn"
+            onclick="searchProduct()">
+
+            Search
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- ABOUT -->
+
+<section id="about-section">
+
+    <h2>
+        About Our Platform
+    </h2>
+
+    <p>
+        Welcome to the <strong>Online Shopping System</strong>!
+        We provide a simple and convenient online shopping platform
+        where users can explore products, register their account,
+        login, select products and place orders easily.
+    </p>
+
+</section>
+
+
+<!-- CATEGORIES -->
+
+<section class="main-content">
+
+    <h2>
+        Shop by Categories
+    </h2>
+
+    <div class="category-grid">
+
+        <div class="category-box">
+
+            <a href="#"
+               onclick="showSection('dresses'); return false;">
+
+                <img
+                    src="https://static.vecteezy.com/system/resources/thumbnails/026/680/634/small/pink-female-dress-mock-up-isolated-on-white-background-ai-generative-photo.jpg"
+                    alt="Dresses">
+
+                👗 Dresses
+
+            </a>
+
+        </div>
+
+
+        <div class="category-box">
+
+            <a href="#"
+               onclick="showSection('electronics'); return false;">
+
+                <img
+                    src="https://img.magnific.com/free-photo/modern-stationary-collection-arrangement_23-2149309649.jpg?semt=ais_hybrid&w=740&q=80"
+                    alt="Electronics">
+
+                💻 Electronics
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SIGNUP -->
+
+<section id="signup"
+         class="form-section hidden">
+
+    <h2>
+        Welcome To The Shopping World
+    </h2>
+
+    <h2>
+        Signup Here!
+    </h2>
+
+    <form onsubmit="return registrationMessage();">
+
+        <div class="form-group">
+
+            <label>Enter Your Name:</label>
+
+            <input
+                type="text"
+                placeholder="Enter your name"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Email:</label>
+
+            <input
+                type="email"
+                placeholder="Enter your email"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Phone No:</label>
+
+            <input
+                type="tel"
+                pattern="[0-9]{10}"
+                maxlength="10"
+                placeholder="Enter 10 digit phone number"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Password:</label>
+
+            <input
+                type="password"
+                minlength="8"
+                placeholder="Enter password"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Enter OTP:</label>
+
+            <input
+                type="text"
+                placeholder="Enter OTP"
+                required>
+
+        </div>
+
+
+        <button
+            class="form-button"
+            type="submit">
+
+            Submit Registration
+
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- LOGIN -->
+
+<section id="login"
+         class="form-section hidden">
+
+    <h2>
+        Login Here!
+    </h2>
+
+    <form onsubmit="return loginMessage();">
+
+        <div class="form-group">
+
+            <label>Email:</label>
+
+            <input
+                type="email"
+                placeholder="Enter your email"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Password:</label>
+
+            <input
+                type="password"
+                placeholder="Enter your password"
+                required>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="form-button">
+
+            Login
+
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- DRESSES -->
+
+<section id="dresses"
+         class="main-content hidden">
+
+    <h2>
+        Dresses Collection
+    </h2>
+
+    <div class="category-grid">
+
+
+        <div class="category-box">
+
+            <img
+                src="https://images.unsplash.com/photo-1732709470611-670308da8c5e?q=80&w=880&auto=format&fit=crop"
+                alt="Women's Dress">
+
+            <h3>
+                Women's Dress
+            </h3>
+
+            <p class="product-price">
+                ₹799
+            </p>
+
+            <button
+                class="form-button"
+                onclick="setProduct('Women Dress','799')">
+
+                Place Order
+
+            </button>
+
+        </div>
+
+
+        <div class="category-box">
+
+            <img
+                src="https://images.unsplash.com/photo-1546804784-896d0dca3805?q=80&w=1170&auto=format&fit=crop"
+                alt="Party Dress">
+
+            <h3>
+                Party Dress
+            </h3>
+
+            <p class="product-price">
+                ₹1299
+            </p>
+
+            <button
+                class="form-button"
+                onclick="setProduct('Party Dress','1299')">
+
+                Place Order
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ELECTRONICS -->
+
+<section id="electronics"
+         class="main-content hidden">
+
+    <h2>
+        Electronics Collection
+    </h2>
+
+    <div class="category-grid">
+
+
+        <div class="category-box">
+
+            <img
+                src="https://img.magnific.com/free-photo/modern-stationary-collection-arrangement_23-2149309649.jpg?semt=ais_hybrid&w=740&q=80"
+                alt="Headphones">
+
+            <h3>
+                Headphones
+            </h3>
+
+            <p class="product-price">
+                ₹1499
+            </p>
+
+            <button
+                class="form-button"
+                onclick="setProduct('Headphones','1499')">
+
+                Place Order
+
+            </button>
+
+        </div>
+
+
+        <div class="category-box">
+
+            <img
+                src="https://img.magnific.com/free-photo/modern-stationary-collection-arrangement_23-2149309649.jpg?semt=ais_hybrid&w=740&q=80"
+                alt="Smart Watch">
+
+            <h3>
+                Smart Watch
+            </h3>
+
+            <p class="product-price">
+                ₹2499
+            </p>
+
+            <button
+                class="form-button"
+                onclick="setProduct('Smart Watch','2499')">
+
+                Place Order
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ORDER FORM -->
+
+<section id="order"
+         class="form-section hidden">
+
+    <h2>
+        Place Your Order
+    </h2>
+
+    <form onsubmit="return orderMessage();">
+
+        <div class="form-group">
+
+            <label>Product:</label>
+
+            <input
+                type="text"
+                id="product"
+                readonly
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Price:</label>
+
+            <input
+                type="text"
+                id="price"
+                readonly
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Quantity:</label>
+
+            <input
+                type="number"
+                id="quantity"
+                value="1"
+                min="1"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Your Name:</label>
+
+            <input
+                type="text"
+                id="customerName"
+                placeholder="Enter your name"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Phone Number:</label>
+
+            <input
+                type="tel"
+                id="customerPhone"
+                pattern="[0-9]{10}"
+                maxlength="10"
+                placeholder="Enter 10 digit phone number"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Delivery Address:</label>
+
+            <textarea
+                id="address"
+                rows="4"
+                placeholder="Enter delivery address"
+                required></textarea>
+
+        </div>
+
+
+        <div class="payment">
+
+            <strong>
+                Payment Method
+            </strong>
+
+            <br>
+
+            <input
+                type="radio"
+                name="payment"
+                value="Cash on Delivery"
+                required>
+
+            Cash on Delivery
+
+            <br>
+
+            <input
+                type="radio"
+                name="payment"
+                value="UPI">
+
+            UPI Method / Card
+
+            <br>
+
+            <input
+                type="radio"
+                name="payment"
+                value="Credit/Debit Card">
+
+            Credit / Debit Card
+
+        </div>
+
+
+        <button
+            class="form-button"
+            type="submit">
+
+            Place Order
+
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- ORDERS TABLE -->
+
+<section class="orders-section">
+
+    <h2>
+        Customer Orders
+    </h2>
+
+    <div class="table-container">
+
+        <table id="ordersTable">
+
+            <tr>
+
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Payment</th>
+                <th>Address</th>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        © 2026 QuickShop | AJAX + XML Online Shopping System
+    </p>
+
+</footer>
+
+</body>
+</html>
